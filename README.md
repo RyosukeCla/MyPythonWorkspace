@@ -10,4 +10,5 @@ $ docker-compose up -d
 ## Jupyterlab
 ```
 $ docker-compose exec admin bash jupyter lab
+$ go to http://localhost:8080
 ```
