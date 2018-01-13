@@ -2,6 +2,13 @@
 Build python environment without any annoying protocols.
 All you need is Docker.
 
+including
+- pyenv
+- anaconda 3
+- jupyterlab
+- jupyter with extensions
+- nodejs
+
 ## setup workspace
 ```
 $ docker-compose up -d
