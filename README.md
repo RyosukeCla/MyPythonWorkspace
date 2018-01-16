@@ -1,32 +1,52 @@
 # My Python Workspace
-Build python environment without any annoying protocols.
-All you need is Docker.
+Build data-science workspace without any annoying protocols.
+All you need is [Docker](https://www.docker.com/).
 
-including
+## Feature
+|Jupyter Kernels|
+|:-------------:|
+| python 3.6.x  |
+| R 3.4.x       |
+| Julia 0.6.2   |
+
+includings
 - pyenv
 - anaconda 3
 - jupyterlab
-- jupyter with extensions
+- jupyter nbextensions
 - nodejs
+- julia
+- r
 
-## setup workspace
+## Requirement
+Install Docker Community Edittion.
+- https://www.docker.com/community-edition
+
+## Getting Started
+
+### launch workspace
 ```
 $ docker-compose up -d
 ```
 
-## jupyterlab
+### boot jupyterlab
 ```
 $ docker-compose exec admin bash jupyter lab
 ```
 go to [localhost:8080](http://localhost:8080)
 
-## destory workspace
+### destory workspace
 ```
 $ docker-compose down
 ```
 
-## start/stop worksplace
+### start/stop worksplace
+if you want to stop workspace temporarily,
+```
+$ docker-compose stop
+```
+
+and, if you want to start stopped workspace
 ```
 $ docker-compose start
-$ docker-compose stop
 ```
