@@ -28,6 +28,7 @@ RUN \
   pyenv rehash && \
   pyenv global anaconda3-5.0.1
 ENV PATH $PYENV_ROOT/versions/anaconda3-2.5.0/bin/:$PATH
+ENV CONDA_DIR $PYENV_ROOT/versions/anaconda3-2.5.0/
 RUN conda update conda
 
 # setup jupyter
@@ -47,7 +48,41 @@ RUN \
   jupyter contrib nbextensions migrate
 
 # install jupyter lab
-RUN conda install -y conda-forge jupyterlab
+RUN conda install -y -c conda-forge jupyterlab
 
 # install nodejs
-RUN conda install -y conda-forge nodejs
+RUN conda install -y nodejs
+
+# install R
+USER root
+RUN apt-get update && \
+  apt-get install -y --no-install-recommends \
+  fonts-dejavu \
+  tzdata \
+  gfortran \
+  gcc \
+  libxext-dev \
+  libxrender1 && apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
+
+# install R kernel for jupyter
+USER admin
+RUN conda config --system --append channels r && \
+  conda install --quiet --yes \
+  'rpy2' \
+  'r-base' \
+  'r-irkernel' \
+  'r-plyr' \
+  'r-devtools' \
+  'r-tidyverse' \
+  'r-shiny' \
+  'r-rmarkdown' \
+  'r-forecast' \
+  'r-rsqlite' \
+  'r-reshape2' \
+  'r-nycflights13' \
+  'r-caret' \
+  'r-rcurl' \
+  'r-crayon' \
+  'r-randomforest' && \
+  conda clean -tipsy

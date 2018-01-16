@@ -4,3 +4,4 @@ anaconda3/
 .ipynb_checkpoints/
 node_modules/
 .DS_Store
+.Rhistory
