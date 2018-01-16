@@ -23,6 +23,13 @@ Install Docker Community Edittion.
 - https://www.docker.com/community-edition
 
 ## Getting Started
+### Fork and Clone
+1. [Fork this repository](https://github.com/RyosukeCla/MyPythonWorkspace#fork-destination-box)
+2. clone __Your__ repository with terminal
+```
+$ git clone git@github.com:YOUR_ACCOUNT/MyPythonWorkspace.git
+$ cd MyPythonWorkspace
+```
 
 ### launch workspace
 ```
