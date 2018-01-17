@@ -111,3 +111,11 @@ RUN \
   julia -e 'Pkg.update()' && \
   julia -e 'Pkg.add("IJulia")' && \
   julia -e 'using IJulia'
+
+# install DNN lib
+RUN conda install -y tensorflow keras chainer
+RUN conda install -y opencv
+
+# install mcmc lib
+RUN conda install -y pymc3 mkl theano pygpu
+ENV MKL_THREADING_LAYER=GNU
