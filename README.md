@@ -20,7 +20,7 @@ includings
 
 pacakges
 - pymc3
-- tensorflow / keras / chainer / scikit learn
+- tensorflow / keras / chainer / theano / scikit learn
 - scikit image / opencv
 - numpy / scipy
 - pandas
