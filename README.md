@@ -18,6 +18,14 @@ includings
 - julia
 - r
 
+pacakges
+- pymc3
+- tensorflow / keras / chainer / scikit learn
+- scikit image / opencv
+- numpy / scipy
+- pandas
+- matplotlib / seaborn
+
 ## Requirement
 Install Docker Community Edittion.
 - https://www.docker.com/community-edition
@@ -38,9 +46,15 @@ $ docker-compose up -d
 
 ### boot jupyterlab
 ```
-$ docker-compose exec admin bash jupyter lab
+$ docker-compose exec admin jupyter lab
 ```
 go to [localhost:8080](http://localhost:8080)
+
+### boot tensor board
+```
+$ docker-compose exec admin tensorboard --logdir=./path/to/logs
+```
+go to [localhost:6006](http://localhost:6006)
 
 ### destory workspace
 ```
