@@ -1,6 +1,5 @@
 # My Python Workspace
-Build data-science workspace without any annoying protocols.
-All you need is [Docker](https://www.docker.com/).
+My research workspace for graduation thesis
 
 ## Feature
 |Jupyter Kernels|
@@ -32,13 +31,6 @@ Install Docker Community Edittion.
 - https://www.docker.com/community-edition
 
 ## Getting Started
-### Fork and Clone
-1. Fork this repository
-2. Clone __Your__ repository with terminal
-```
-$ git clone git@github.com:${YOUR_ACCOUNT}/MyPythonWorkspace.git
-$ cd MyPythonWorkspace
-```
 
 ### launch workspace
 ```
