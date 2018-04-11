@@ -87,31 +87,6 @@ RUN conda config --system --append channels r && \
   'r-randomforest' && \
   conda clean -tipsy
 
-# install Julia
-USER root
-ENV JULIA_PKGDIR=/opt/julia
-ENV JULIA_VERSION=0.6.2
-RUN mkdir /opt/julia-${JULIA_VERSION} && \
-    cd /tmp && \
-    wget -q https://julialang-s3.julialang.org/bin/linux/x64/`echo ${JULIA_VERSION} | cut -d. -f 1,2`/julia-${JULIA_VERSION}-linux-x86_64.tar.gz && \
-    echo "dc6ec0b13551ce78083a5849268b20684421d46a7ec46b17ec1fab88a5078580 *julia-${JULIA_VERSION}-linux-x86_64.tar.gz" | sha256sum -c - && \
-    tar xzf julia-${JULIA_VERSION}-linux-x86_64.tar.gz -C /opt/julia-${JULIA_VERSION} --strip-components=1 && \
-    rm /tmp/julia-${JULIA_VERSION}-linux-x86_64.tar.gz
-RUN ln -fs /opt/julia-*/bin/julia /usr/local/bin/julia
-
-RUN mkdir /etc/julia && \
-    echo "push!(Libdl.DL_LOAD_PATH, \"$CONDA_DIR/lib\")" >> /etc/julia/juliarc.jl && \
-    mkdir $JULIA_PKGDIR && \
-    chown admin $JULIA_PKGDIR
-
-# install Julia kernel for jupyter
-USER admin
-RUN \
-  julia -e 'Pkg.init()' && \
-  julia -e 'Pkg.update()' && \
-  julia -e 'Pkg.add("IJulia")' && \
-  julia -e 'using IJulia'
-
 # install DNN lib
 RUN conda install -y tensorflow keras chainer
 RUN conda install -y opencv
@@ -119,3 +94,11 @@ RUN conda install -y opencv
 # install mcmc lib
 RUN conda install -y pymc3 mkl theano pygpu
 ENV MKL_THREADING_LAYER=GNU
+
+# install comet_ml
+RUN pip install comet_ml
+
+# for remote debug
+RUN pip install ptvsd==3.0.0
+
+RUN pip install flake8

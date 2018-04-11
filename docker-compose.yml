@@ -6,6 +6,7 @@ services:
       - 80:80
       - 8080:8080 # jupyter
       - 6006:6006 # tensorboard
+      - 3000:3000 # remote debug
     volumes:
       - .:/home/admin/workspace
     tty: true
