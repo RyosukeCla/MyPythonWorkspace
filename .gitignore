@@ -2,6 +2,7 @@ anaconda3/
 .misc/
 .cache/
 .ipynb_checkpoints/
+.idea
 node_modules/
 .DS_Store
 .Rhistory
