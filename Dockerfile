@@ -102,3 +102,5 @@ RUN pip install comet_ml
 RUN pip install ptvsd==3.0.0
 
 RUN pip install flake8
+
+RUN pip install python-dotenv
