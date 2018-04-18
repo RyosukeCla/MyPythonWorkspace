@@ -1,8 +1,8 @@
-#Trains a simple deep NN on the MNIST dataset.
+# Trains a simple deep NN on the MNIST dataset.
 from __future__ import print_function
 
-#pre install comet_ml by running : pip install comet_ml
-#make sure comet_ml is the first import (before all other Machine learning lib)
+# pre install comet_ml by running : pip install comet_ml
+# make sure comet_ml is the first import (before all other Machine learning lib)
 import os
 
 from comet_ml import Experiment
@@ -32,18 +32,20 @@ def main():
     y_train = keras.utils.to_categorical(y_train, num_classes)
     y_test = keras.utils.to_categorical(y_test, num_classes)
 
-    train(x_train,y_train,x_test,y_test)
+    train(x_train, y_train, x_test, y_test)
 
-def build_model_graph(input_shape=(784,)):
+
+def build_model_graph():
     model = Sequential(X)
     model.add(Dense(512, activation='relu', input_shape=(784,)))
     model.add(Dense(512, activation='relu'))
     model.add(Dense(10, activation='softmax'))
-    model.compile(loss='categorical_crossentropy',optimizer=RMSprop(), metrics=['accuracy'])
+    model.compile(loss='categorical_crossentropy', optimizer=RMSprop(), metrics=['accuracy'])
 
     return model
 
-def train(x_train,y_train,x_test,y_test):
+
+def train(x_train, y_train, x_test, y_test):
     # Define model
     model = build_model_graph()
 
@@ -52,13 +54,16 @@ def train(x_train,y_train,x_test,y_test):
     experiment = Experiment(api_key=api_key, project_name='keras-examples')
     experiment.log_dataset_hash(x_train)
 
-    # and thats it... when you run your code all relevant data will be tracked and logged in https://www.comet.ml/view/YOUR-API-KEY
+    # and thats it... when you run your code all relevant data will be tracked and logged in https://www.comet.ml/view/
     model.fit(x_train, y_train, batch_size=32, epochs=5, validation_data=(x_test, y_test), verbose=2)
 
     score = model.evaluate(x_test, y_test, verbose=2)
 
+    return
+
+
 if __name__ == '__main__':
-    api_key = os.environ.get("COMETML_API_KEY", "None")
-    if api_key != "None":
-        print("hey" + os.environ["COMETML_API_KEY"])
+    if os.environ.get("COMETML_API_KEY", "None") != "None":
         main()
+    else:
+        print("set COMETML_API_KEY")
