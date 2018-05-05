@@ -9,7 +9,7 @@ logger = getLogger(__name__)
 
 logger.debug('hello')
 
-dotenv_path = path.join(path.dirname(__file__), '.env0')
+dotenv_path = path.join(path.dirname(__file__), '.env')
 
 if path.exists(dotenv_path):
   load_dotenv(dotenv_path)
