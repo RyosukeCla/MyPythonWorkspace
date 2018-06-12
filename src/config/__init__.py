@@ -16,7 +16,7 @@ if path.exists(dotenv_path):
 else:
   logger.warn('didnt load env file. if you want to load private env, put .env to src/config .')
 
-COMET_ML_API_KEY = environ.get('COMET_ML_API_KEY')
+COMETML_API_KEY = environ.get('COMETML_API_KEY')
 
 def __main__():
   print('test init')
