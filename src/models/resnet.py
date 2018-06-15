@@ -44,6 +44,61 @@ class PlainBlock(nn.Module):
     out = F.relu(out)
     return out
 
+class PlainV2Block(nn.Module):
+  u"""
+    Plain Architecture version 2 - improved plain block
+
+                INPUT
+      batchnorm
+      relu
+      conv
+      batchnorm       shortcut
+      relu
+      dropout
+      conv
+                output
+
+    this makes
+      conv2d in_d, out_d / 4, with kernel = (3, 3)
+      conv2d out_d, oud_d / 4, with kernel = (3, 3)
+
+    ex) normal plain block
+      conv2d 64 -> 64, with kernel = (3, 3)
+      conv2d 64 -> 64, with kernel = (3, 3)
+
+    Args:
+      in_d: input dimention. ex) number of input color channels
+      out_d: output dimention. ex) number of output color channels
+      stride
+  """
+
+  def __init__(self, in_d, out_d, stride=1):
+    super(PlainBlock, self).__init__()
+
+    self.bn1 = nn.BatchNorm2d(in_d)
+    self.conv1 = nn.Conv2d(in_d, out_d, 3, stride=stride, padding=1, bias=False)
+    self.bn2 = nn.BatchNorm2d(out_d)
+    self.do = nn.Dropout2d()
+    self.conv2 = nn.Conv2d(out_d, out_d, 3, stride=1, padding=1, bias=False)
+
+    if in_d is out_d:
+      self.shortcut = nn.Sequential()
+    else:
+      self.shortcut = nn.Sequential(
+        nn.Conv2d(in_d, out_d, 1, stride, bias=False)
+      )
+
+  def forward(self, x):
+    out = self.bn1(x)
+    out = F.relu(out)
+    out = self.conv1(out)
+    out = self.bn2(out)
+    out = F.relu(out)
+    out = self.do(out)
+    out = self.conv2(out)
+    out += self.shortcut(x)
+    return out
+
 class BottleneckBlock(nn.Module):
   u"""
     Bottoleneck Architecture for ResNet
