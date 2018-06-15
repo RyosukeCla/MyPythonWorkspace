@@ -73,7 +73,7 @@ class PlainV2Block(nn.Module):
   """
 
   def __init__(self, in_d, out_d, stride=1):
-    super(PlainBlock, self).__init__()
+    super(PlainV2Block, self).__init__()
 
     self.bn1 = nn.BatchNorm2d(in_d)
     self.conv1 = nn.Conv2d(in_d, out_d, 3, stride=stride, padding=1, bias=False)
@@ -190,7 +190,7 @@ class BottleneckV2Block(nn.Module):
 
   """
   def __init__(self, in_d, out_d, stride=1):
-    super(BottleneckBlock, self).__init__()
+    super(BottleneckV2Block, self).__init__()
     mid_d = int(out_d / 4)
     if mid_d < 1:
       mid_d = 1
