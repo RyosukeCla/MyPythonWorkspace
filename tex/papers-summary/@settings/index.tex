@@ -1,0 +1,34 @@
+\usepackage[top=20truemm,bottom=20truemm,left=20truemm,right=20truemm]{geometry}
+\usepackage{setspace}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{ascmac}
+\usepackage{theorem}
+\usepackage{enumerate}
+% \usepackage{mathrsfs}
+\usepackage[usenames]{color}
+% \usepackage{graphicx}
+\setstretch{1.25}
+\theorembodyfont{\normalfont}
+\newtheorem{theo}{定理}[section]
+\newtheorem{defi}{定義}[section]
+\newtheorem{lemma}{補題}[section]
+\newtheorem{prop}{命題}[section]
+\newtheorem{coro}{系}[section]
+\newtheorem{exam}{例}[section]
+\newtheorem{notice}{注意}[section]
+\newtheorem{exer}{演習}[section]
+\newtheorem{ques}{問題}[section]
+\newtheorem{answ}{解答}[section]
+\makeatletter
+\renewcommand{\theequation}{% 式番号の付け方
+\thesection.\arabic{equation}}
+\@addtoreset{equation}{section}
+\renewcommand{\thefigure}{% 図番号の付け方
+\thesection.\arabic{figure}}
+\@addtoreset{figure}{section}
+\renewcommand{\thetable}{% 表番号の付け方
+\thesection.\arabic{table}}
+\@addtoreset{table}{section}
+\makeatother
+\allowdisplaybreaks[4]

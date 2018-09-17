@@ -1,0 +1,41 @@
+\documentclass[12pt,fleqn,dvipdfmx]{jarticle}
+  \usepackage{docmute}
+  \input{./@settings/index}
+  \input{./@settings/commands}
+
+  \begin{document}
+
+  \title{papers summary}
+  \author{Ryosuke Suzuki}
+  \date{}
+  \maketitle
+  \tableofcontents
+  \newpage
+
+  % papers
+
+  \include{./StarGAN/index}
+
+  \end{document}
+
+  % 画像挿入用
+  % \begin{figure}[htbp]\centering\includegraphics[width=9cm, bb=0 0 300 300]{photo.pdf}\caption{}\label{fig:photo}\end{figure}
+
+  % 複数画像挿入用
+  % \begin{figure}[htbp]\begin{tabular}{c}\begin{minipage}{0.5 \hsize}\centering\includegraphics[width=5cm, bb=0 0 640 640]{photo.jpg}\caption{}\label{fig:}\end{minipage}
+  % \begin{minipage}{0.5 \hsize}\centering\includegraphics[width=5cm, bb=0 0 640 640]{photo.jpg}\caption{}\label{fig:}\end{minipage}\end{tabular}\end{figure}
+
+  % 表挿入用
+  % \begin{table}[htbp]\centering\caption{}\includegraphics[width=9cm, bb=0 0 300 300]{photo.pdf}\label{tab:photo}\end{table}
+
+  % 参考文献用
+  % \begin{thebibliography}{99}
+  % \bibitem{bib}中村和幸\ (2014)，「題名」，応用数理学会（またはURL＋月日アクセス）．
+  % \end{thebibliography}
+
+  % 参考文献用 2
+  % \newpage
+  % \begin{thebibliography}{99}
+  % \bibitem{toyoda}豊田秀樹\ (2015)，「基礎からのベイズ統計: ハミルトニアンモンテカルロ法による実践的入門」，朝倉書店．
+  % \bibitem{motomura}本村陽一，岩崎弘利\ (2006)，「ベイジアンネットワーク技術\ ユーザ・顧客のモデル化と不確実性推論」，東京電機大学出版局．
+  % \end{thebibliography}
