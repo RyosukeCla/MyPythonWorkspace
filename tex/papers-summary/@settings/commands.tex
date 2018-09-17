@@ -31,3 +31,14 @@
   \pgfkeys{/NewBibItemArgs, default, #2}%
   \bibitem{#1} \bibAuthor. \bibTitle. In \textit{Proceedings of \bibBookTitle}. \bibMonth, \bibYear.
 }
+
+
+% PutImageInCenter{image path in @imgs}[Option{A Picture}][Option{width=8cm}][Option{h}]
+\NewDocumentCommand {\PutImageInCenter} { m m O{A Picture} O{width=8cm} O{h} } {%
+  \begin{figure}[#5]
+    \includegraphics[#4]{#1}
+    \centering
+    \caption{#3}
+    \label{#2}
+  \end{figure}
+}
