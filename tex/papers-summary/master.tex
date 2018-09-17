@@ -1,0 +1,31 @@
+\documentclass[12pt,fleqn,dvipdfmx]{jarticle}
+  \usepackage{docmute}
+  \input{./@settings/common}
+  \input{./@settings/master}
+  \input{./@settings/commands}
+
+  \begin{document}
+
+  \title{papers summary}
+  \author{Ryosuke Suzuki}
+  \date{}
+  \maketitle
+  \tableofcontents
+  \newpage
+
+  % papers
+
+  \include{./example/index}
+  \include{./StarGAN/index}
+
+  \end{document}
+
+  % 画像挿入用
+  % \begin{figure}[htbp]\centering\includegraphics[width=9cm, bb=0 0 300 300]{photo.pdf}\caption{}\label{fig:photo}\end{figure}
+
+  % 複数画像挿入用
+  % \begin{figure}[htbp]\begin{tabular}{c}\begin{minipage}{0.5 \hsize}\centering\includegraphics[width=5cm, bb=0 0 640 640]{photo.jpg}\caption{}\label{fig:}\end{minipage}
+  % \begin{minipage}{0.5 \hsize}\centering\includegraphics[width=5cm, bb=0 0 640 640]{photo.jpg}\caption{}\label{fig:}\end{minipage}\end{tabular}\end{figure}
+
+  % 表挿入用
+  % \begin{table}[htbp]\centering\caption{}\includegraphics[width=9cm, bb=0 0 300 300]{photo.pdf}\label{tab:photo}\end{table}

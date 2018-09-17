@@ -1,0 +1,44 @@
+\usepackage{xparse}
+\usepackage{pgfkeys}
+
+% NewBibItemArgs
+\pgfkeys{
+  /NewBibItemArgs/.is family, /NewBibItemArgs,
+  % Here are the options that a user can pass
+  default/.style = {
+    author = Auther,
+    title = Title,
+    booktitle = BookTitle,
+    month = Jun,
+    year = 2018,
+  },
+  % Here is the dictionary for positions.
+  author/.estore in = \bibAuthor,
+  title/.estore in = \bibTitle,
+  booktitle/.estore in = \bibBookTitle,
+  month/.estore in = \bibMonth,
+  year/.estore in = \bibYear,
+}
+
+% NewBibItem{cite key}{NewBibItemArgs}
+\NewDocumentCommand {\NewBibItem} { m m } {%
+  \pgfkeys{/NewBibItemArgs, default, #2}%
+  \bibitem{#1} \bibAuthor. \bibTitle. \textit{\bibBookTitle}. \bibMonth, \bibYear.
+}
+
+% InProceedings{cite key}{NewBibItemArgs}
+\NewDocumentCommand {\InProceedings} { m m } {%
+  \pgfkeys{/NewBibItemArgs, default, #2}%
+  \bibitem{#1} \bibAuthor. \bibTitle. In \textit{Proceedings of \bibBookTitle}. \bibMonth, \bibYear.
+}
+
+
+% PutImageInCenter{image path in @imgs}{label}[Option{A Picture}][Option{width=8cm}][Option{h}]
+\NewDocumentCommand {\PutImageInCenter} { m m O{A Picture} O{width=8cm} O{h} } {%
+  \begin{figure}[#5]
+    \includegraphics[#4]{#1}
+    \centering
+    \caption{#3}
+    \label{#2}
+  \end{figure}
+}

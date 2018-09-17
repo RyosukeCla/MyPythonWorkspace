@@ -1,0 +1,48 @@
+\documentclass[12pt,fleqn,dvipdfmx]{jarticle}
+
+  \input{../@settings/common}
+  \input{../@settings/paper}
+  \input{../@settings/commands}
+
+  \begin{document}
+  \section{STARGAN}
+    Unified Generative Adversarial Networks for Multi-Domain Image-to-Image Translation \cite{StarGAN2018}
+  \subsection{Abstract}
+    Image to Multi Domain ImageができるGAN。経験則的に顔の部分と表情の変換には効果的なモデル。
+  \subsection{Intro}
+    \subsubsection{Dataset}
+      \begin{itemize}
+        \item CelebA\cite{CelebA} : 10,177人のセレブ、202,599サイズ、40種類の表情のデータセット
+        \item RaFD\cite{RaFD} : 67人の8種類の表情のデータセット
+      \end{itemize}
+    \subsubsection{Compare}
+      既存のmulti domainモデルは、$k$個のドメインに対して$k(k-1)$個のgeneratorを学習させる必要がある。が、StarGANは一個だけでいいんだよ
+      (\ref{fig:StarGAN-1})。
+
+      \PutImageInCenter{./stargan-fig-1.png}{fig:StarGAN-1}[Compare]
+
+  \newpage
+  \begin{thebibliography}{99}
+    \InProceedings{StarGAN2018}{%
+      author={Choi, Yunjey and Choi, Minje and Kim, Munyoung and Ha, Jung-Woo and Kim, Sunghun and Choo, Jaegul},
+      title={StarGAN: Unified Generative Adversarial Networks for Multi-Domain Image-to-Image Translation},
+      booktitle={The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+      month={June},
+      year={2018}
+    }
+
+    \InProceedings{CelebA}{%
+      author = {Ziwei Liu and Ping Luo and Xiaogang Wang and Xiaoou Tang},
+      title = {Deep Learning Face Attributes in the Wild},
+      booktitle = {International Conference on Computer Vision (ICCV)},
+      month = December,
+      year = {2015}
+    }
+
+    \bibitem{RaFD}
+      Langner, O., Dotsch, R., Bijlstra, G., Wigboldus, D.H.J., Hawk, S.T., \& van Knippenberg, A.
+      (2010). Presentation and validation of the Radboud Faces Database.
+      \textit{Cognition \& Emotion, 24(8)}, 1377—1388. DOI: 10.1080/02699930903485076
+  \end{thebibliography}
+
+  \end{document}
