@@ -5,7 +5,7 @@
   \input{../@settings/commands}
 
   \begin{document}
-  \section{STARGAN}
+  \section{StarGAN}
     Unified Generative Adversarial Networks for Multi-Domain Image-to-Image Translation \cite{StarGAN2018}
   \subsection{Abstract}
     Image to Multi Domain ImageができるGAN。経験則的に顔の部分と表情の変換には効果的なモデル。
@@ -16,10 +16,64 @@
         \item RaFD\cite{RaFD} : 67人の8種類の表情のデータセット
       \end{itemize}
     \subsubsection{Compare}
-      既存のmulti domainモデルは、$k$個のドメインに対して$k(k-1)$個のgeneratorを学習させる必要がある。が、StarGANは一個だけでいいんだよ
+      既存のmulti domainモデルは、$k$個のドメインに対して$k(k-1)$個のgeneratorを学習させる必要がある。が、StarGANは一個だけでいい
       (\ref{fig:StarGAN-1})。
 
       \PutImageInCenter{./stargan-fig-1.png}{fig:StarGAN-1}[Compare]
+
+      \begin{itemize}
+        \item GAN
+        \item Conditional GANs
+        \item Image to Image Translation. pix2pix, cGANs, UNIT, CoGAN, CycleGAN, DiscoGAN
+      \end{itemize}
+  \subsection{Method}
+    GOAL: to train A Single $G$ that learns mappings among multiple domains.
+
+    HOW: to achive this, we train $G$ to traslate an input image $x$ into
+    an output image $y$ conditioned on the target domain label $c$, $G(x, c) \rightarrow y$
+
+    We randomly generate the target domain label $c$ so that $G$ learns to flexibly translate the input image.
+
+    We introduce an auxiliary(補助的な) classifier that allows a single discriminator to control multiple domains.
+
+    That is, our discriminator $D$ produces probability distributions over both sources and domain labels, $D:x\rightarrow \{D_{src}(x), D_{cls}(x)\}$.
+    $D$はinput image $x$ を $\{ real/fake, domains \}$ にマップする。
+
+    $G$ tries to minimize the objetive, while $D$ tries to maximize it.
+    \\
+
+    \textbf{Domain Classification Loss.} For a given input image $x$ and a target domain label $c$,
+    our goal is to translate $x$ into an ouput image $y$, which is properly classified to the taget domain $c$.
+
+    objective: a domain classification loss of real images used to optimize $D$, and a domain classficiation loss of fake images used to optimze $G$.
+
+     $$L^r_{cls}=\mathbb{E}_{x, c'}[-\log{D_{cls}(c'|x)}]$$
+
+    $L^r_{cls}$を学習データを使ってminimizeすることで、$D$は与えられた画像に適切なラベルをつけるようになる。
+
+     $$L^f_{cls}=\mathbb{E}_{x, c}[-\log{D_{cls}(c|G(x, c))}]$$
+
+    $G$は$L^f_{cls}$をminimizeすることで、$G$によって生成された画像が目的ドメインとして判別されるようになう。
+    \\
+
+    \textbf{Reconstruction Loss.}
+    By minimizing the \textit{adversarial} and \textit{classification} losses(２つのloss), $G$はrealisticでclassifiedな画像を生成できる。
+    However, minimizing the losses does not guarantee that ドメインに変換しつつ、入力画像の質を維持する。これを緩和するため、we apply a cycle consistency loss to the generator.
+
+      $$L_{rec}=\mathbb{E}_{x, c, c'} [\| x - G(G(x, c), c') \|_1] $$
+
+    これは、target domain $c$を設定して生成される$G(x, c)$を、元のdomain $c'$に生成し直すということ。Reconstuctionするということだね。
+    ちなみに、L1ノルム使ってる。
+    \\
+
+    \textbf{Full Objective.}
+
+     $$L_D = -L_{adv} + \lambda_{cls}L^r_{cls}$$
+
+     $$L_G = L_{adv} + \lambda_{cls}L^f_{cls} + \lambda_{rec}L_{rec}$$
+
+    We use $\lambda_{cls} = 1,~ \lambda_{rec} = 10$
+
 
   \newpage
   \begin{thebibliography}{99}
